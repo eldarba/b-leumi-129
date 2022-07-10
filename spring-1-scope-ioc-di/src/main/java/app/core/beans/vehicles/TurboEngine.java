@@ -1,6 +1,5 @@
 package app.core.beans.vehicles;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -9,19 +8,18 @@ import lombok.Data;
 @Data
 @Component
 @Scope("prototype")
-@Primary
-public class BasicEngine implements Engine {
-	private static int c = 1001;
+public class TurboEngine implements Engine {
+	private static int c = 3001;
 	private int id = c++;
 
 	@Override
 	public void turnOn() {
-		System.out.println("BasicEngine ON");
+		System.out.println("TurboEngine ON");
 	}
 
 	@Override
 	public void turnOff() {
-		System.out.println("BasicEngine OFF");
+		System.out.println("TurboEngine OFF");
 	}
 
 }

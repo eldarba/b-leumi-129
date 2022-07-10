@@ -14,8 +14,14 @@ import lombok.ToString;
 public class Car implements Vehicle {
 	private static int c = 101;
 	private int number = c++;
-	@Autowired // DI - Dependency Injection
 	private Engine engine;
+	
+	//@Autowired // DI - Dependency Injection
+	public Car(Engine engine) {
+		super();
+		this.engine = engine;
+	}
+	
 
 	@Override
 	public void move() {
@@ -28,5 +34,6 @@ public class Car implements Vehicle {
 		this.engine.turnOff();
 		System.out.println("Car stopped");
 	}
+
 
 }
