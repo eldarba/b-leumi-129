@@ -19,29 +19,36 @@ public class App {
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
 				Scanner sc = new Scanner(System.in)) {
 			Calculator calc = ctx.getBean(Calculator.class);
-			calc.divide(100, 0);
 
+			for (int i = 0; i < 25; i++) {
+				try {
+					Integer a = (int) (Math.random() * 6);
+					Integer b = (int) (Math.random() * 6);
+					a = a == 3 ? null : a;
+					calc.divide(a, b);
+					Thread.sleep(300);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+			}
+			System.out.println("\n\n\n");
+			LogAspect logAspect = ctx.getBean(LogAspect.class);
+			logAspect.printSuccessHistory();
+			System.out.println("\n\n\n");
+			logAspect.printErrorHistory();
 			
-			
-			//			System.out.print("enter a: ");
-//			int a = sc.nextInt();
-//			System.out.print("enter b: ");
-//			int b = sc.nextInt();
-//			calc.divide(100, 5);
-//			calc.divide(45, 7);
-//			calc.divide(1000, 300);
-//			
-//			LogAspect logAspect = ctx.getBean(LogAspect.class);
-//			logAspect.printHistory();
-//			
-//			logAspect.clearHistory();
-//			calc.divide(2, 4);
-//			calc.divide(100, 28);
-//			calc.divide(10, 10);
-//			logAspect.printHistory();
-			
+
+			System.out.println("\n\n\n");
+			System.out.println("CLEAR SUCCESS HISTORY");
+			logAspect.clearSuccessHistory();
+			calc.divide(2, 4);
+			calc.divide(100, 28);
+			calc.divide(10, 10);
+			logAspect.printSuccessHistory();
+
 		} catch (Exception e) {
-			System.out.println("Error: " + e.getMessage());
+			//System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
