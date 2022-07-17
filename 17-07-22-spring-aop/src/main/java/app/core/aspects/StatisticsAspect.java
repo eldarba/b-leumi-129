@@ -62,7 +62,5 @@ public class StatisticsAspect {
 	public int getFurnitureSalesCount() {
 		return furnitureSalesCount;
 	}
-	
-	
 
 }
