@@ -1,6 +1,7 @@
 package app.core.aspects;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -17,7 +19,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class LogAspect {
-
 
 	@Before("div()")
 	public void beforeDiv(JoinPoint jp) {
@@ -40,20 +41,54 @@ public class LogAspect {
 		System.out.println(">>> AfterThrowing: " + jp.getSignature().getName() + " - threw: " + e);
 		this.errorMap.put(LocalDateTime.now(), e);
 	}
-	
-	public Object arroundDiv(ProceedingJoinPoint jp) {
-		return null;
+
+	@Around("div()")
+	public Object arroundDiv(ProceedingJoinPoint jp) throws Throwable {
+		// ====== before
+		System.out.println(">>> @Around: before");
+		Object res;
+		if (LocalTime.now().isBefore(LocalTime.of(8, 00, 0))) {
+			try {
+				res = jp.proceed(); // invoking joinpoint (business)
+			} catch (ArithmeticException e) {
+				res = "infinity";
+			}
+
+		} else {
+			res = "no service at this time";
+		}
+		// ====== after
+		System.out.println(">>> @Around: after");
+		return res;
 	}
 
+	@Before("annotatedClass()")
+	public void beforeMyAnnotation(JoinPoint jp) {
+		System.out.println(">>>@@@ @Before: MyAnotation: " + jp.getSignature().getName());
+	}
+	
+	// POINTCUTS
+
+	// no annotations in business
 	@Pointcut("execution(java.lang.String divide(Integer, Integer))")
 	public void div() {
-	};
+	}
+
+	// for annotations on methods
+	@Pointcut("@annotation(app.core.aspects.annotations.MyLogAnnotation)")
+	public void annotatedMethod() {
+	}
+
+	// for annotations on class
+	@Pointcut("@target(app.core.aspects.annotations.MyLogAnnotation)")
+	public void annotatedClass() {
+	}
 
 	// other members for aspect logic
 	private Map<Integer, String> successMap = new LinkedHashMap<>();
 	private int successCount;
 	private Map<LocalDateTime, Throwable> errorMap = new LinkedHashMap<>();
-	
+
 	public void printErrorHistory() {
 		System.out.println("======== calculator error history:");
 		for (LocalDateTime key : errorMap.keySet()) {

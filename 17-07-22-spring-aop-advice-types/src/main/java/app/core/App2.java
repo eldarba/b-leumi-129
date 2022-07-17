@@ -19,7 +19,8 @@ public class App2 {
 				Scanner sc = new Scanner(System.in)) {
 
 			Calculator calc = ctx.getBean(Calculator.class);
-			calc.divide(100, 20);
+			calc.add(100, 5);
+			calc.sub(100, 5);
 
 		} catch (Exception e) {
 			// System.out.println("Error: " + e.getMessage());
