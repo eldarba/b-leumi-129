@@ -13,8 +13,17 @@ public class RealEstateSales {
 		System.out.println(amount + " Houses were sold");
 	}
 
-	public void saleStore() {
+	public int saleStore() {
 		System.out.println("Store was sold");
+		return 0;
+	}
+
+	public void check() {
+		System.out.println("just checking");
+	}
+
+	public void validate() {
+		System.out.println("validating");
 	}
 
 }

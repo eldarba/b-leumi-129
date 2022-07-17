@@ -19,9 +19,6 @@ public class App {
 			RealEstatePurchase realEstatePurchase = ctx.getBean(RealEstatePurchase.class);
 			RealEstateSales realEstateSales = ctx.getBean(RealEstateSales.class);
 			
-			System.out.println(realEstatePurchase.getClass());
-			System.out.println(realEstateSales.getClass());
-			System.out.println("==================");
 			
 			realEstatePurchase.buyHouse(3);
 			realEstatePurchase.buyHouse();
