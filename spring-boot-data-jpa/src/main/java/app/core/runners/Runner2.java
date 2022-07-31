@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import app.core.entities.Person;
 import app.core.repositories.PersonRepository;
 
-@Component
+//@Component
 @Order(2)
 public class Runner2 implements CommandLineRunner {
 

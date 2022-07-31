@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import app.core.daos.PersonDao;
 import app.core.entities.Person;
 
-@Component
+//@Component
 @Order(1)
 public class Runner1 implements CommandLineRunner {
 

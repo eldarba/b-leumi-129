@@ -9,6 +9,8 @@ public interface PersonService {
 	int createPerson(Person person);
 
 	Person getPerson(int id);
+	
+	List<Person> getPersonYungerThan(int age);
 
 	List<Person> getAll();
 

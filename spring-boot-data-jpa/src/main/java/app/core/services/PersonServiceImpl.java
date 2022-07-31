@@ -28,8 +28,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Person getPerson(int id) {
-		return repo.findById(id).orElseThrow(
-				() -> new RuntimeException("getPerson failed - not found"));
+		return repo.findById(id).orElseThrow(() -> new RuntimeException("getPerson failed - not found"));
 	}
 
 	@Override
@@ -41,13 +40,19 @@ public class PersonServiceImpl implements PersonService {
 	public void updatePerson(Person person) {
 		if (repo.existsById(person.getId())) {
 			repo.save(person);
+		} else {
+			throw new RuntimeException("updatePerson failed - not exists");
 		}
-		throw new RuntimeException("updatePerson failed - not exists");
 	}
 
 	@Override
 	public void deletePerson(int id) {
 		repo.deleteById(id);
+	}
+
+	@Override
+	public List<Person> getPersonYungerThan(int age) {
+		return repo.findByAgeLessThan(age);
 	}
 
 }
