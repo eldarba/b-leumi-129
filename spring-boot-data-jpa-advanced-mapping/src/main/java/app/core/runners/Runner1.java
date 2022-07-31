@@ -9,7 +9,7 @@ import app.core.entities.Address;
 import app.core.entities.School;
 import app.core.services.AppService;
 
-@Component
+//@Component
 @Order(1)
 public class Runner1 implements CommandLineRunner {
 	@Autowired
@@ -45,7 +45,7 @@ public class Runner1 implements CommandLineRunner {
 	}
 
 	void doCreateNewSchool() {
-		School school = new School(0, "JBT", new Address(0, "Israel", "Jerusalem", "Begin", 25, null));
+		School school = new School(0, "JBT", new Address(0, "Israel", "Jerusalem", "Begin", 25, null),null);
 		appService.createNewSchool(school);
 	}
 
