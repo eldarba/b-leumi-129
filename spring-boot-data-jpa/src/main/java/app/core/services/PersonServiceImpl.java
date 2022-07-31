@@ -39,14 +39,15 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public void updatePerson(Person person) {
-		// TODO Auto-generated method stub
-
+		if (repo.existsById(person.getId())) {
+			repo.save(person);
+		}
+		throw new RuntimeException("updatePerson failed - not exists");
 	}
 
 	@Override
 	public void deletePerson(int id) {
-		// TODO Auto-generated method stub
-
+		repo.deleteById(id);
 	}
 
 }
