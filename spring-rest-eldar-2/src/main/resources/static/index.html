@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Welcome To Dictionary</h1>
+
+    <input id="word" type="text" placeholder="enter word">
+    <br>
+    <button onclick="fetchDfinitions()">show definition</button>
+   <fieldset>
+       <legend>definition</legend>
+       <div id="def"></div>
+   </fieldset>
+
+    <script>
+        function fetchDfinitions() {
+            const word = document.getElementById("word").value;
+            let xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                console.dir(this.response);
+                let arr = JSON.parse(this.response);
+                console.dir(arr);
+                const def = arr[0].definition;
+                console.log(def);
+                document.getElementById("def").innerHTML = def;
+
+            }
+            let url = "/api/dictionary/" + word
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>

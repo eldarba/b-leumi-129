@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import app.core.jwt.JwtUtil;
 import app.core.jwt.JwtUtil.ClientDetails;
 
-@Component
+//@Component
 @Order(1)
 public class LoginFilter implements Filter {
 	

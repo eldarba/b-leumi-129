@@ -17,7 +17,8 @@ import app.core.entities.Entry;
 import app.core.services.DictionaryService;
 
 @RestController
-@RequestMapping(path= "/api/dictionary", headers = HttpHeaders.AUTHORIZATION)
+//@RequestMapping(path= "/api/dictionary", headers = HttpHeaders.AUTHORIZATION)
+@RequestMapping(path= "/api/dictionary")
 public class DictionaryController {
 	
 	@Autowired
@@ -28,7 +29,7 @@ public class DictionaryController {
 		return dictionaryService.add(entry);
 	}
 	
-	@PostMapping("/{word}")
+	@GetMapping("/{word}")
 	public List<Entry> getDefinitions(@PathVariable String word){
 		return this.dictionaryService.getDefinition(word);
 	}
