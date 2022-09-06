@@ -43,7 +43,7 @@ public class Demo1 {
 		System.out.println(token);
 		
 		//////////////////////////
-		String jws = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYWFAbWFpbCIsImlhdCI6MTY2MjQ1MzU2NCwiZXhwIjoxNjYyNDUzNTk0LCJuYW1lIjoiRWxkYXIiLCJhZGRyZXNzIjoiSmVydXNhbGVtLCBJc3JhZWwifQ.JX_at4MJPuLDoXHPBp8LkX3KQ9nQakjfoAPelW4_uo0";
+		String jws = "eyJhbGciOiJIUzI1NiJ9.eyJjbGllbnRUeXBlIjoiQURNSU4iLCJzdWIiOiJ1c2VyQG1haWwiLCJpYXQiOjE2NjI0NjE4NTUsImV4cCI6MTY2MjQ2MjE1NX0.UW1Ovi3PqBAzgaAHIZrDOYAm7fssQuFSo0UzyDPu_ys";
 		JwtParser jwtParser = Jwts.parserBuilder().setSigningKey(key).build();
 		Jws<Claims> jwt = jwtParser.parseClaimsJws(jws);
 		

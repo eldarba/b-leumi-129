@@ -1,5 +1,7 @@
 package app.core.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,10 @@ public class DictionaryService {
 	
 	public int add(Entry entry) {
 		return repository.save(entry).getId();
+	}
+	
+	public List<Entry> getDefinition(String word) {
+		return this.repository.findByWord(word);
 	}
 
 }
