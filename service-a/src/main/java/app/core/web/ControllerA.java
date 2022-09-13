@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 @RestController
 public class ControllerA {
 	
@@ -22,6 +24,7 @@ public class ControllerA {
 //	private LoadBalancerClient loadBalancerClient;
 	
 	// http://localhost:8001/service/a
+	@HystrixCommand(fallbackMethod = "handleAFallback")
 	@GetMapping("/service/a")
 	public String handleA() {
 //		String serviceId = "service-b";
@@ -29,6 +32,10 @@ public class ControllerA {
 		String url = "http://service-b/service/b"; 
 		String bResponse = restTemplate.getForObject(url, String.class);
 		return "Service A - " + bResponse; 
+	}
+	
+	public String handleAFallback(Throwable t) {
+		return "service-a fallback: cant access service-b: " + t;
 	}
 	
 	// LB
